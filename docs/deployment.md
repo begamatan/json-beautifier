@@ -36,7 +36,7 @@ The dev stack mounts source directories as volumes and uses:
 | Variable               | Default                   | Description                        |
 |------------------------|--------------------------|------------------------------------|
 | `PORT`                 | `8080`                   | Backend listen port                |
-| `CORS_ALLOWED_ORIGINS` | `*`                      | Comma-separated allowed origins    |
+| `CORS_ALLOWED_ORIGINS` | `*`                      | Allowed origin or `*` wildcard for all       |
 | `VITE_API_BASE_URL`    | `/api/v1`                | Frontend API base URL (build-time) |
 | `BACKEND_URL`          | `http://localhost:8080`  | Vite dev-server proxy target       |
 
