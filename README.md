@@ -110,7 +110,7 @@ npm run dev
 
 ## Docker Setup
 
-### Build and run everything
+### Production build
 
 ```bash
 docker compose up --build
@@ -119,10 +119,22 @@ docker compose up --build
 - Frontend: http://localhost:80
 - Backend health: http://localhost:8080/api/v1/health
 
+### Development (hot reload)
+
+```bash
+docker compose -f docker-compose.dev.yml up --build
+```
+
+- Frontend dev server (Vite): http://localhost:5173
+- Backend API: http://localhost:8080/api/v1/health
+- Source changes are reflected immediately — no rebuild required.
+
 ### Stop
 
 ```bash
 docker compose down
+# or, for the dev stack:
+docker compose -f docker-compose.dev.yml down
 ```
 
 ---
@@ -141,6 +153,12 @@ docker compose down
 | Variable | Default | Description |
 |---|---|---|
 | `VITE_API_BASE_URL` | `/api/v1` | API base URL |
+
+### Frontend (Vite dev server)
+
+| Variable | Default | Description |
+|---|---|---|
+| `BACKEND_URL` | `http://localhost:8080` | Proxy target for `/api` requests |
 
 ---
 
