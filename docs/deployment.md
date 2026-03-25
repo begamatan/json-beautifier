@@ -9,6 +9,8 @@
 
 ## Local Docker Compose
 
+### Production
+
 ```bash
 docker compose up --build
 ```
@@ -16,13 +18,27 @@ docker compose up --build
 - Frontend: http://localhost:80
 - Backend: http://localhost:8080/api/v1/health
 
+### Development (hot reload)
+
+```bash
+docker compose -f docker-compose.dev.yml up --build
+```
+
+- Frontend dev server (Vite): http://localhost:5173
+- Backend API: http://localhost:8080/api/v1/health
+
+The dev stack mounts source directories as volumes and uses:
+- **backend**: [`air`](https://github.com/air-verse/air) for Go hot reload (config in `backend/.air.toml`)
+- **frontend**: Vite dev server (`npm run dev --host`), with `/api` requests proxied to the backend via `BACKEND_URL`
+
 ## Environment Variables
 
-| Variable               | Default   | Description                        |
-|------------------------|-----------|------------------------------------|
-| `PORT`                 | `8080`    | Backend listen port                |
-| `CORS_ALLOWED_ORIGINS` | `*`       | Comma-separated allowed origins    |
-| `VITE_API_BASE_URL`    | `/api/v1` | Frontend API base URL              |
+| Variable               | Default                   | Description                        |
+|------------------------|--------------------------|------------------------------------|
+| `PORT`                 | `8080`                   | Backend listen port                |
+| `CORS_ALLOWED_ORIGINS` | `*`                      | Comma-separated allowed origins    |
+| `VITE_API_BASE_URL`    | `/api/v1`                | Frontend API base URL (build-time) |
+| `BACKEND_URL`          | `http://localhost:8080`  | Vite dev-server proxy target       |
 
 ## Production Considerations
 

@@ -1,5 +1,6 @@
 # Go
 backend/vendor/
+backend/tmp/
 
 # Node / npm
 frontend/node_modules/
